@@ -4,25 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Trajets</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 
 <body>
-    {% if user.is_authenticated %}
-        <p>Bonjour, {{ user.username }}! <a href="{% url 'logout' %}">Se déconnecter</a></p>
-        <p><a href="{% url 'booking:reservations' %}">Mes Reservations</a></p>
-    {% else %}
-        <p><a href="{% url 'login' %}">Se connecter</a> | <a href="{% url 'login' %}">S'inscrire ne fonctionne pas</a></p> 
-    {% endif %}
+    <div class="container">
+        {% if user.is_authenticated %}
+            <p class="mb-3">Bonjour, {{ user.username }}! <a href="{% url 'logout' %}" class="btn btn-primary">Se déconnecter</a></p>
+            <p><a href="{% url 'booking:reservations' %}" class="btn btn-secondary">Mes Réservations</a></p>
+        {% else %}
+            <p><a href="{% url 'login' %}" class="btn btn-primary">Se connecter</a> | <a href="{% url 'login' %}" class="btn btn-primary">S'inscrire</a></p> 
+        {% endif %}
 
-    {% if trajets %}
-        <ul>
-        {% for trajet in trajets %}
-            <li> {{ trajet.gare_depart }} - {{ trajet.gare_arrivee }} </li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun trajet disponible.</p>
-    {% endif %}
+        <div class="row">
+            <h2>Liste des Trajets</h2>
+                <table class="table table-stripped">
+                    <thead>
+                        <tr>
+                            <th>Gare de départ</th>
+                            <th>Gare d'arrivée</th>
+                            <th>Date de départ</th>
+                            <th>Date d'arrivée</th>
+                        </tr>
+
+                    </thead>
+                    <tbody>
+                        {% for trajet in trajets %}
+                            <tr>
+                                <td>{{ trajet.gare_depart }}</td>
+                                <td>{{ trajet.gare_arrivee }}</td>
+                                <td>{{ trajet.heure_depart }}</td>
+                                <td>{{ trajet.heure_arrivee }}</td>
+                            </tr>
+                        {% endfor %}   
+                    </tbody>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
 </html>

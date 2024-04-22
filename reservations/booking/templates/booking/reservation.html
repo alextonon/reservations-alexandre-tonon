@@ -3,8 +3,21 @@
 <head>
     <title>Détails de la réservation n° {{ reservation.numero_reservation }}</title>
 </head>
+
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails de la réservation n° {{ reservation.numero_reservation }}</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+
 <body>
-    <h1>Détails de la réservation</h1>
+    <h1>Détails de la réservation n° {{ reservation.numero_reservation }}</h1>
     <p>Date de réservation : {{ reservation.date_reservation }}</p>
     <p>Client : {{ reservation.client }}</p>
     <p>Passager : {{ reservation.passager }}</p>

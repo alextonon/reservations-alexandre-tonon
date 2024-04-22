@@ -1,27 +1,55 @@
+{% load bootstrap5 %}
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liste des Trajets</title>
+    <title>Liste des Réservations</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 
-<body>
-    {% if user.is_authenticated %}
-        <p>Bonjour, {{ user.username }}! <a href="{% url 'logout' %}">Se déconnecter</a></p>
-    {% else %}
-        <p><a href="{% url 'login' %}">Se connecter</a> | <a href="{% url 'login' %}">S'inscrire ne fonctionne pas</a></p> 
-    {% endif %}
 
-    {% if reservations %}
-        <ul>
-        {% for reservation in reservations %}
-        <li><a href="{% url 'booking:reservation_details' reservation.numero_reservation %}">{{ reservation.id }} : {{ reservation.trajet }} - {{ reservation.date_reservation }}</a></li>
-        {% endfor %}
-        </ul>
-    {% else %}
-        <p>Aucun trajet disponible.</p>
-    {% endif %}
+<body>
+    <div class="container">
+        {% if user.is_authenticated %}
+        <p class="m-3">Bonjour, {{ user.username }}! <a href="{% url 'logout' %}" class="btn btn-danger">Se déconnecter</a></p>
+        {% else %}
+            <p class="m-3"><a href="{% url 'login' %}" class="btn btn-primary">Se connecter</a> | <a href="{% url 'signup' %}" class="btn btn-success">S'inscrire</a></p> 
+        {% endif %}
+        
+        <div class="row">
+            <h2>Liste des Réservations</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Numéro de réservation</th>
+                            <th>Date de réservation</th>
+                            <th>Client</th>
+                            <th>Passager</th>
+                            <th>Trajet</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for reservation in reservations %}
+                            <tr>
+                                <td>{{ reservation.numero_reservation }}</td>
+                                <td>{{ reservation.date_reservation }}</td>
+                                <td>{{ reservation.client }}</td>
+                                <td>{{ reservation.passager }}</td>
+                                <td>{{ reservation.trajet }}</td>
+                                <td>
+                                    <a href="{% url 'booking:reservation_details' reservation.numero_reservation %}" class="btn btn-primary">Détails</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
-</html>
 </html>
