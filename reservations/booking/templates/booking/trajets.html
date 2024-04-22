@@ -1,8 +1,13 @@
+<!DOCTYPE html>
+<html lang="fr">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liste des Trajets</title>
 </head>
 
 <body>
+    <h1>Liste des Trajets</h1>
     {% if trajets %}
         <ul>
         {% for trajet in trajets %}
@@ -10,6 +15,7 @@
         {% endfor %}
         </ul>
     {% else %}
-        <p>No trajets are available.</p>
+        <p>Aucun trajet disponible.</p>
     {% endif %}
 </body>
+</html>
