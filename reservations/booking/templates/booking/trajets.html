@@ -9,6 +9,7 @@
 <body>
     {% if user.is_authenticated %}
         <p>Bonjour, {{ user.username }}! <a href="{% url 'logout' %}">Se déconnecter</a></p>
+        <p><a href="{% url 'booking:reservations' %}">Mes Reservations</a></p>
     {% else %}
         <p><a href="{% url 'login' %}">Se connecter</a> | <a href="{% url 'login' %}">S'inscrire ne fonctionne pas</a></p> 
     {% endif %}
