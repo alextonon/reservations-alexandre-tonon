@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_list_or_404, get_object_or_404
+from django.shortcuts import render, get_list_or_404, get_object_or_404,redirect
 
 from .models import Trajet
 from .models import Reservation
+
+from .forms import ReservationForm
 
 from django.contrib.auth.decorators import login_required
 
@@ -18,3 +20,16 @@ def reservations(request):
 def reservation_details(request, numero_reservation):
     reservation = get_object_or_404(Reservation, pk=numero_reservation)
     return render(request, 'booking/reservation.html', {'reservation': reservation})
+
+@login_required
+def edit_reservation(request):
+    reservation = None
+    if request.method == 'POST':
+        form = ReservationForm(request.POST, instance=reservation)
+        if form.is_valid():
+            reservation = form.save()
+            return redirect('booking:reservation_details', reservation_id=reservation.id)
+    else:
+        form = ReservationForm(instance=reservation)
+
+    return render(request, 'booking/edit_reservation.html', {'form': form})
