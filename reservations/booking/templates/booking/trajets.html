@@ -7,7 +7,12 @@
 </head>
 
 <body>
-    <h1>Liste des Trajets</h1>
+    {% if user.is_authenticated %}
+        <p>Bonjour, {{ user.username }}! <a href="{% url 'logout' %}">Se déconnecter</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Se connecter</a> | <a href="{% url 'login' %}">S'inscrire ne fonctionne pas</a></p> 
+    {% endif %}
+
     {% if trajets %}
         <ul>
         {% for trajet in trajets %}
@@ -18,4 +23,5 @@
         <p>Aucun trajet disponible.</p>
     {% endif %}
 </body>
+</html>
 </html>
