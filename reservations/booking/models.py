@@ -16,3 +16,25 @@ class Trajet(models.Model):
 
     def __str__(self):
         return f'{self.gare_depart} -> {self.gare_arrivee}'
+
+class Passager(models.Model):
+    nom = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100)
+    date_naissance = models.DateField()
+
+    def __str__(self):
+        return f'{self.nom} {self.prenom}'
+    
+    
+class Reservation(models.Model):
+    numero_reservation = models.CharField(max_length=100, primary_key=True)
+    numero_place = models.IntegerField()
+    trajet = models.ForeignKey(Trajet, on_delete=models.CASCADE)
+    date_reservation = models.DateTimeField(default=datetime.now)
+    passager = models.ForeignKey(Passager, on_delete=models.CASCADE)
+    client = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    
+    
+    
+    def __str__(self):
+        return f'{self.nom} {self.prenom} ({self.trajet})'
