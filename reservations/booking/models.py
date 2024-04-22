@@ -15,4 +15,4 @@ class Trajet(models.Model):
     
 
     def __str__(self):
-        return f'{self.depart} -> {self.arrivee}'
+        return f'{self.gare_depart} -> {self.gare_arrivee}'
