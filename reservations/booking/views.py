@@ -29,6 +29,7 @@ def edit_reservation(request):
         form = ReservationForm(request.POST, instance=reservation)
         if form.is_valid():
             reservation = form.save()
+            reservation.client = request.user
             return redirect('booking:reservation_details', reservation_id=reservation.id)
     else:
         form = ReservationForm(instance=reservation)

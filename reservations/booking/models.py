@@ -27,7 +27,7 @@ class Passager(models.Model):
     
     
 class Reservation(models.Model):
-    numero_reservation = models.CharField(max_length=100, primary_key=True)
+    numero_reservation = models.AutoField(primary_key=True)
     numero_place = models.IntegerField()
     trajet = models.ForeignKey(Trajet, on_delete=models.CASCADE)
     date_reservation = models.DateTimeField(default=datetime.now)
