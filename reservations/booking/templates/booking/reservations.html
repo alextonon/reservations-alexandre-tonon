@@ -20,17 +20,34 @@
         {% endif %}
         
         <div class="row">
-            <div class="col-md-6">
-                <h2>Liste des Réservations</h2>
-                {% if reservations %}
-                    <ul class="list-group">
+            <h2>Liste des Réservations</h2>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Numéro de réservation</th>
+                            <th>Date de réservation</th>
+                            <th>Client</th>
+                            <th>Passager</th>
+                            <th>Trajet</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         {% for reservation in reservations %}
-                            <li class="list-group-item"><a href="{% url 'booking:reservation_details' reservation.numero_reservation %}">{{ reservation.id }} : {{ reservation.trajet }} - {{ reservation.date_reservation }}</a></li>
+                            <tr>
+                                <td>{{ reservation.numero_reservation }}</td>
+                                <td>{{ reservation.date_reservation }}</td>
+                                <td>{{ reservation.client }}</td>
+                                <td>{{ reservation.passager }}</td>
+                                <td>{{ reservation.trajet }}</td>
+                                <td>
+                                    <a href="{% url 'booking:reservation_details' reservation.numero_reservation %}" class="btn btn-primary">Détails</a>
+                                </td>
+                            </tr>
                         {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>Aucun trajet disponible.</p>
-                {% endif %}
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

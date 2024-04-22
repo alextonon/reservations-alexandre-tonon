@@ -4,6 +4,7 @@ from .models import Trajet
 from .models import Reservation
 
 from django.contrib.auth.decorators import login_required
+from django import forms
 
 def trajets(request):
     trajets = get_list_or_404(Trajet.objects.all())
