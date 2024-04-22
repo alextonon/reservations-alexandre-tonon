@@ -1,0 +1,15 @@
+<head>
+    <title>Liste des Trajets</title>
+</head>
+
+<body>
+    {% if trajets %}
+        <ul>
+        {% for trajet in trajets %}
+            <li> {{ trajet.gare_depart }} - {{ trajet.gare_arrivee }} </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No trajets are available.</p>
+    {% endif %}
+</body>
