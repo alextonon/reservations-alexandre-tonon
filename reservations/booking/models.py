@@ -37,4 +37,4 @@ class Reservation(models.Model):
     
     
     def __str__(self):
-        return f'{self.nom} {self.prenom} ({self.trajet})'
+        return f'{self.passager.prenom} {self.passager.nom} ({self.trajet})'

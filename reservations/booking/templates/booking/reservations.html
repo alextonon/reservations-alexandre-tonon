@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liste des Trajets</title>
+</head>
+
+<body>
+    {% if user.is_authenticated %}
+        <p>Bonjour, {{ user.username }}! <a href="{% url 'logout' %}">Se déconnecter</a></p>
+    {% else %}
+        <p><a href="{% url 'login' %}">Se connecter</a> | <a href="{% url 'login' %}">S'inscrire ne fonctionne pas</a></p> 
+    {% endif %}
+
+    {% if reservations %}
+        <ul>
+        {% for reservation in reservations %}
+        <li><a href="{% url 'booking:reservation_details' reservation.numero_reservation %}">{{ reservation.id }} : {{ reservation.trajet }} - {{ reservation.date_reservation }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>Aucun trajet disponible.</p>
+    {% endif %}
+</body>
+</html>
+</html>

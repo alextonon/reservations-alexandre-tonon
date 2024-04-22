@@ -3,6 +3,10 @@ from django.urls import path
 
 from . import views
 
+app_name = 'booking'
+
 urlpatterns = [
-    path("trajets", views.trajets, name="trajets")
+    path("trajets", views.trajets, name="trajets"),
+    path("reservations", views.reservations, name="reservations"),
+    path("reservations/<int:numero_reservation>", views.reservation_details, name="reservation_details")
 ]
