@@ -12,16 +12,29 @@
 
 
 <body>
-    <div class="container">
-        {% if user.is_authenticated %}
-        <p class="m-3">Bonjour, {{ user.username }}! <a href="{% url 'logout' %}" class="btn btn-danger">Se déconnecter</a></p>
-        {% else %}
-            <p class="m-3"><a href="{% url 'login' %}" class="btn btn-primary">Se connecter</a> | <a href="{% url 'signup' %}" class="btn btn-success">S'inscrire</a></p> 
-        {% endif %}
-        
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#"> 
+                <img src="assets/logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+                TrainBooking
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class = container mt-3>        
         <div class="row">
             <h2>Liste des Réservations</h2>
-            <div class="table-responsive">
+            <div class="col">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -51,5 +64,6 @@
             </div>
         </div>
     </div>
+
 </body>
 </html>

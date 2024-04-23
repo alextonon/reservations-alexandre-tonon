@@ -23,8 +23,12 @@ def reservation_details(request, numero_reservation):
     return render(request, 'booking/reservation.html', {'reservation': reservation})
 
 @login_required
-def edit_reservation(request):
-    reservation = None
+def edit_reservation(request, numero_reservation=None):
+    if numero_reservation == None:
+        reservation = None
+    else:
+        reservation = get_object_or_404(Reservation, pk=numero_reservation)
+    
     if request.method == 'POST':
         form = ReservationForm(request.POST, instance=reservation)
         if form.is_valid():
