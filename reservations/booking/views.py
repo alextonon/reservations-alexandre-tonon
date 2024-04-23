@@ -28,6 +28,8 @@ def edit_reservation(request, numero_reservation=None):
         reservation = None
     else:
         reservation = get_object_or_404(Reservation, pk=numero_reservation)
+        if reservation.client != request.user:
+            return redirect('booking:reservations')
     
     if request.method == 'POST':
         form = ReservationForm(request.POST, instance=reservation)
