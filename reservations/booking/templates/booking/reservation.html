@@ -1,20 +1,64 @@
 {% load bootstrap5 %}
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Détails de la réservation n° {{ reservation.numero_reservation }}</title>
+    <title>Modifier ma réservation</title>
     {% bootstrap_css %}
-    {% bootstrap_javascript %}
 </head>
 
 <body>
-    <h1>Détails de la réservation n° {{ reservation.numero_reservation }}</h1>
-    <p>Date de réservation : {{ reservation.date_reservation }}</p>
-    <p>Client : {{ reservation.client }}</p>
-    <p>Passager : {{ reservation.passager }}</p>
-    <p>Trajet : {{ reservation.trajet }}</p>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#"> 
+                <img src="{% static 'images/logo.png' %}" alt="Logo" width="30" height="30" class="d-inline-block align-top">
+                TrainBooking
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'booking:reservations' %}">Mes Réservations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Se déconnecter</a>
+                        </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <h1 class="mb-4">Détails de la réservation n° {{ reservation.numero_reservation }}</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>Date de réservation</th>
+                        <td>{{ reservation.date_reservation }}</td>
+                    </tr>
+                    <tr>
+                        <th>Client</th>
+                        <td>{{ reservation.client }}</td>
+                    </tr>
+                    <tr>
+                        <th>Passager</th>
+                        <td>{{ reservation.passager }}</td>
+                    </tr>
+                    <tr>
+                        <th>Trajet</th>
+                        <td>{{ reservation.trajet }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    {% bootstrap_javascript %}
 </body>
 </html>
